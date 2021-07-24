@@ -8,9 +8,9 @@ fn main() {
     let mut max: u64 = 0;
     println!("maxi={}", maxi);
     for i in 1..maxi {
-        if is_prime(i) {
+        if n % i == 0 {
            //println!("{} is prime!", i);
-           if n % i == 0 {
+           if is_prime(i) {
                max = i;
             }
         }
