@@ -1,2 +1,2 @@
-pub mod Pif;
+pub mod pif;
 

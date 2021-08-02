@@ -1,3 +1,4 @@
+const ERR_MSG: &str= "egg1";
 #[derive(PartialEq, PartialOrd)]
 pub struct Pif {
     a: u32,
@@ -6,13 +7,14 @@ pub struct Pif {
 }
 
 impl Pif {
-    fn new(a: u32, b: u32, c: u32) -> Pif {
+    pub fn new(a: u32, b: u32, c: u32) -> Pif {
         Pif { a, b, c }
     }
-    fn check(&self) -> Result<u32, &str> {
+    pub fn check(&self) -> Result<u32, &str> {
         if self.a >= self.b || self.c != self.a*self.a + self.b*self.b {
             // println!("{}", 
-            Err("a>=b or c2 != a2 + b2")
+            // Err(format!("a={} b={} c={}", self.a, self.b, self.c).as_str())
+            Err(ERR_MSG)
         } else {
             Ok(self.c)
         }
@@ -38,8 +40,12 @@ mod tests {
     fn pif_check() {
        let p1 = Pif::new(3, 4, 25);
        let ch1 = p1.check();
-       println!("{:?}", ch1);
+       println!("check 1: {:?}", ch1);
        assert_eq!(Ok(3*3+4*4), ch1);
+       let p1 = Pif::new(200, 375, 425*425);
+       let ch1 = p1.check();
+       println!("check 2: {:?}", ch1);
+       assert_eq!(Ok(200*200 + 375*375), ch1);
     }
 }
     #[test]
@@ -47,5 +53,5 @@ mod tests {
        let p1 = Pif::new(1, 2, 3);
        let ch1 = p1.check();
        println!("{:?}", ch1);
-       assert_eq!(Err("a>=b or c2 != a2 + b2"), ch1);
+       assert_eq!(Err(ERR_MSG), ch1);
     }
